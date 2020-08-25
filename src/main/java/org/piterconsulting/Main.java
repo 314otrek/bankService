@@ -1,0 +1,62 @@
+package org.piterconsulting;
+
+import org.piterconsulting.repository.InMemoryClientRepository;
+import org.piterconsulting.service.BankService;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class Main {
+    private BankService bankService;
+
+    public static void main(String[] args) {
+        //new Main().run();
+
+
+    }
+
+    public void run() {
+        final InMemoryClientRepository repository = new InMemoryClientRepository(new ArrayList<>());
+         bankService = new BankService(repository);
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (true) {
+                System.out.println("1 - add User");
+                System.out.println("2 - find User");
+                System.out.println("3 - exit App");
+                final String next = scanner.next();
+                if (next.equals("1")) {
+                    addUser(scanner);
+                }
+                if (next.equals("2")) {
+                    printUser(scanner);
+                }
+                if (next.equals("3")) {
+                    break;
+                }
+
+
+            }
+        }
+    }
+
+    private void printUser(Scanner scanner) {
+        System.out.println("Enter mail: ");
+        final String mail = scanner.next();
+        System.out.println(bankService.findByEmail(mail));
+    }
+
+    private void addUser(Scanner scanner) {
+
+        System.out.println("Enter name: ");
+        final String name = scanner.next();
+        System.out.println("Enter mail: ");
+        final String mail = scanner.next();
+        System.out.println("Enter balance: ");
+        final double balance = scanner.nextDouble();
+        bankService.save(new Client(name,mail,balance));
+
+    }
+
+}
