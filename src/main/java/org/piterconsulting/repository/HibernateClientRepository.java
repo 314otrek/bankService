@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
+@HibernateRepository
 public class HibernateClientRepository implements ClientRipository {
     @Override
     public void save(Client client) {

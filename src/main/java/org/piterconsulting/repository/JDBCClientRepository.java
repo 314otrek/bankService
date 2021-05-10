@@ -2,11 +2,13 @@ package org.piterconsulting.repository;
 
 import org.piterconsulting.repository.annotation.JDBCRepository;
 import org.piterconsulting.repository.entity.Client;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-
+@Repository
+@JDBCRepository
 public class JDBCClientRepository implements ClientRipository {
 
     public  final String user;

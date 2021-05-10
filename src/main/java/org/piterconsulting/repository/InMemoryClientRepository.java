@@ -1,13 +1,15 @@
 package org.piterconsulting.repository;
 
+import org.piterconsulting.repository.annotation.InMemoryRepository;
 import org.piterconsulting.repository.entity.Client;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-
+@Repository
 public class InMemoryClientRepository implements ClientRipository {
     private List<Client> clients;
 

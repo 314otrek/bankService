@@ -1,14 +1,8 @@
 package org.piterconsulting.service;
 
-import org.piterconsulting.repository.ClientRipository;
 import org.piterconsulting.repository.ClientSpringJpaRepository;
-import org.piterconsulting.repository.HibernateClientRepository;
-import org.piterconsulting.repository.JDBCClientRepository;
-import org.piterconsulting.repository.annotation.HibernateRepository;
-import org.piterconsulting.repository.annotation.JDBCRepository;
 import org.piterconsulting.repository.entity.Client;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -17,10 +11,11 @@ import java.util.Objects;
 @Service
 public class BankService {
 
-    private final ClientRipository clientRipository;
+    private final ClientSpringJpaRepository clientRipository;
+
     @Autowired
     public BankService(
-                    ClientRipository clientRipository ) {
+            ClientSpringJpaRepository clientRipository ) {
         this.clientRipository = clientRipository;
     }
 
