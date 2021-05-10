@@ -1,13 +1,10 @@
 package org.piterconsulting.repository;
 
-import org.piterconsulting.Client;
-
-import java.util.Set;
+import org.piterconsulting.repository.entity.Client;
 
 public interface ClientRipository {
     void save(Client client);
-    Client findByEmail22(String email);
-     boolean isExistMail(String mail);
+    Client findByMail(String email);
       void delete(Client client);
 
 

@@ -1,58 +1,50 @@
 package org.piterconsulting.service;
 
-import org.piterconsulting.Client;
 import org.piterconsulting.repository.ClientRipository;
+import org.piterconsulting.repository.ClientSpringJpaRepository;
+import org.piterconsulting.repository.HibernateClientRepository;
+import org.piterconsulting.repository.JDBCClientRepository;
+import org.piterconsulting.repository.annotation.HibernateRepository;
+import org.piterconsulting.repository.annotation.JDBCRepository;
+import org.piterconsulting.repository.entity.Client;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
-import java.util.Set;
 
+@Service
 public class BankService {
-    private final ClientRipository clientRipository;
 
-    public BankService(ClientRipository clientRipository) {
+    private final ClientRipository clientRipository;
+    @Autowired
+    public BankService(
+                    ClientRipository clientRipository ) {
         this.clientRipository = clientRipository;
     }
 
-    private boolean emailExists(Set<Client> clientSet, String email) {
-        return clientSet
-                .stream()
-                .anyMatch(client -> Objects.equals(client.getMail(), email.toLowerCase()));
-    }
 
 
     public void save(Client client) {
-        if (client.getMail() == null || client.getName() == null) {
-            throw new NullPointerException("Null value in params!");
-        }
-        if (clientRipository.isExistMail(client.getMail())) {
-            Client k1 = clientRipository.findByEmail22(client.getMail());
-            if (k1.getName().compareTo(client.getName()) == 0) {
-                throw new thisManAlreadyExistInBaseException("This man exist in base");
-            } else {
-                throw new SameEmailsException("Same mails!");
-            }
-        } else {
-            client.getMail().toLowerCase();
-            clientRipository.save(client);
-        }
+//        if (client.getMail() == null || client.getName() == null) {
+//            throw new NullPointerException("Null value in params!");
+//        }
+//            Client k1 = clientRipository.findByMail(client.getMail());
+//            if(k1.getMail().compareTo(client.getMail())==0){
+//                throw new SameEmailsException("Same mails!");
+//            }
+//            else {
+                clientRipository.save(client);
+//            }
     }
 
-    public Client findByEmail(String email) {
-
-        if (clientRipository.isExistMail(email)) {
-            return clientRipository.findByEmail22(email);
-        } else {
-            throw new NoSuchElementException("lack of this man in base:");
-        }
+    public Client findByEmail(String mail) {
+            return clientRipository.findByMail(mail);
     }
 
     public void transfer(String fromEmail, String toEmail, double amount) {
 
-
-        if (!clientRipository.isExistMail(fromEmail) || !clientRipository.isExistMail(toEmail)) {
-            throw new NullPointerException("No one of this man in base!");
-        }
         if (amount <= 0) {
             throw new IllegalArgumentException("Negative amount is not allowed");
         }
@@ -70,7 +62,8 @@ public class BankService {
         } else {
             throw new NoSufficientFundsException("Not enough funds!");
         }
-
+    clientRipository.save(fromClient);
+        clientRipository.save(toClient);
     }
 
 
@@ -109,10 +102,6 @@ public class BankService {
 
         if(mail==null){
             throw new IllegalArgumentException("Dont delete user with null mail");
-        }
-
-        if (!clientRipository.isExistMail(mail.toLowerCase())) {
-            throw new NoSuchElementException("No this man in base");
         }
         Client k1 = findByEmail(mail.toLowerCase());
         if(k1.getBalance()!=0){

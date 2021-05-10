@@ -1,25 +1,36 @@
 package org.piterconsulting;
 
-import org.piterconsulting.repository.InMemoryClientRepository;
+import org.piterconsulting.repository.ClientRipository;
+import org.piterconsulting.repository.HibernateClientRepository;
+import org.piterconsulting.repository.entity.Account;
+import org.piterconsulting.repository.entity.Client;
 import org.piterconsulting.service.BankService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 
-public class Main {
-    private BankService bankService;
+@SpringBootApplication
+public class Main implements CommandLineRunner {
 
-    public static void main(String[] args) {
-        //new Main().run();
-
-
+    private  final BankService bankService;
+    @Autowired
+    public Main(BankService bankService) {
+        this.bankService = bankService;
     }
 
-    public void run() {
-        final InMemoryClientRepository repository = new InMemoryClientRepository(new ArrayList<>());
-         bankService = new BankService(repository);
+    public static void main(String[] args) {
+        SpringApplication.run(Main.class,args);
+    }
+
+
+    @Override
+    public void run(String... args) throws Exception {
+
+
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
                 System.out.println("1 - add User");
@@ -55,8 +66,11 @@ public class Main {
         final String mail = scanner.next();
         System.out.println("Enter balance: ");
         final double balance = scanner.nextDouble();
-        bankService.save(new Client(name,mail,balance));
+        final Account account = new Account(balance,"PLN");
+        final List<Account>accounts = List.of(account);
+       bankService.save(new Client(name,mail,accounts));
 
     }
+
 
 }

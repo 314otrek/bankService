@@ -1,0 +1,16 @@
+jdbc:
+  url: "jdbc:postgresql://localhost:5432/test"
+  user: "postgres"
+  password: "javadev"
+
+
+
+
+spring:
+  datasource:
+    username: "postgres"
+    password: "javadev"
+    url: "jdbc:postgresql://localhost:5432/test"
+    driver-class: "org.postgresql.Driver"
+
+

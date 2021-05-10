@@ -1,11 +1,12 @@
 package org.piterconsulting.repository;
 
-import org.piterconsulting.Client;
+import org.piterconsulting.repository.entity.Client;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
-import java.util.Set;
+
 
 public class InMemoryClientRepository implements ClientRipository {
     private List<Client> clients;
@@ -20,21 +21,18 @@ public class InMemoryClientRepository implements ClientRipository {
     public void save(Client client) {
         clients.add(client);
     }
-    public Client findByEmail22(String email) {
+    public Client findByMail(String email) {
         return clients
                 .stream()
                 .filter(client -> Objects.equals(client.getMail(),email))
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException(
-                        "Cleinent without following email" + email)
-                );
+                      String.format("Client with following email: %s not found", email)
+                ));
     }
 
 
-    @Override
-    public boolean isExistMail(String mail) {
-        return clients.stream().anyMatch(cl ->cl.getMail().equals(mail) );
-    }
+
 
     @Override
     public void delete(Client client) {
