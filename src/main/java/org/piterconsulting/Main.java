@@ -41,12 +41,14 @@ public class Main implements CommandLineRunner {
     final Page<Client> pagex = repository.findByName("Piotr",PageRequest.of(0,1));
     pagex.getContent().forEach(System.out::println);
 
+        System.out.println("-----------------------");
+
     for (int i =0;i<pagex.getTotalPages();i++){
         final Page<Client> page = repository.findByName("Piotr",PageRequest.of(i,1));
         page.getContent().forEach(System.out::println);
     }
 
-
+        System.out.println("Sorted list by name ------------------------");
     final List<Client> list2 = repository.findAll(Sort.by("name"));
     list2.forEach(System.out::println);
 
