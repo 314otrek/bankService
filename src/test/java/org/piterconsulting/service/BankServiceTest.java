@@ -4,7 +4,6 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.piterconsulting.repository.ClientRipository;
 import org.piterconsulting.repository.ClientSpringJpaRepository;
 import org.piterconsulting.repository.entity.Account;
 import org.piterconsulting.repository.entity.Client;

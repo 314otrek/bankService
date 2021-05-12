@@ -3,27 +3,29 @@
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
 //import org.piterconsulting.repository.entity.Client;
+//import org.piterconsulting.service.BankService;
+//
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//public class InMemoryClientRepositoryTest {
+//public class ClientJpaRepositoryTest {
 //
-//    private InMemoryClientRepository repository;
-//    private List<Client> clients;
+//    private ClientSpringJpaRepository repository;
+//    private BankService bankService;
 //
 //    @BeforeEach
 //    public void steup(){
-//        clients = new ArrayList<>();
-//        repository = new InMemoryClientRepository(clients);
+//        repository = mock()
 //    }
+//
 //
 //    @Test
 //    public void veryfiyIfUserIsAddingCorrectlyToTheRepository(){
 //        //given
-//        final Client alek = new Client("Alek", "A@A.com", 100);
-//        final Client expectedClient = new Client("Alek", "A@A.com", 100);
+//        final Client alek = new Client("Alek", "A@A.com", new ArrayList<>());
+//        final Client expectedClient = new Client("Alek", "A@A.com", new ArrayList<>());
 //
 //        //when
 //        repository.save(alek);
