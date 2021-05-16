@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Account {
 
     @Id
@@ -19,11 +20,19 @@ public class Account {
     private double balance;
     @Column(name = "currency")
     private String currency;
+    @Column(name = "USER_ID")
+    private Long userId;
 
     public Account(double balance,String currency){
         this.balance=balance;
         this.currency=currency;
     }
 
+    public double getBalance() {
+        return balance;
+    }
 
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }

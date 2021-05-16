@@ -13,8 +13,8 @@ import java.util.List;
 
 public interface ClientSpringJpaRepository extends JpaRepository<Client,Long> {
 
-    @Query("Select c From Client c where c.mail =:mail")
-    Client findByMail(@Param("mail") String mail);
+    Client findByMail( String mail);
+
 
     List<Client> findByName(String name);
     Page<Client> findByName(String name, Pageable pageable);
