@@ -1,5 +1,6 @@
 package org.piterconsulting.service;
 
+import lombok.Data;
 import org.piterconsulting.controllers.dto.ClientRequest;
 import org.piterconsulting.controllers.dto.ClientResponse;
 import org.piterconsulting.repository.ClientRepository;

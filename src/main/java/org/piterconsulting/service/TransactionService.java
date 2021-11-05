@@ -17,16 +17,16 @@ public class TransactionService {
     private  final AccountService accountService;
     private final TransactionMapper mapper;
 
-
-
     public TransactionService(TransactionRepository repository, AccountService accountService, TransactionMapper mapper) {
         this.repository = repository;
         this.accountService = accountService;
         this.mapper = mapper;
     }
+
     public TransactionEntity findById(long id){
         return repository.findById(id);
     }
+
     public TransactionResponse findResponseById(long id){
         final TransactionEntity transactionEntity = findById(id);
         return mapper.map(transactionEntity);
@@ -42,7 +42,6 @@ public class TransactionService {
                 ,request.getAccountIdTo()
                 ,request.getAmount()
         );
-
         repository.save(
                 TransactionEntity.builder()
                         .amount(request.getAmount())
@@ -54,4 +53,6 @@ public class TransactionService {
                         .build()
         );
     }
+
+
 }
