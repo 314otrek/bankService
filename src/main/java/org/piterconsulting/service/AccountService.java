@@ -1,54 +1,45 @@
 package org.piterconsulting.service;
 
-import lombok.RequiredArgsConstructor;
 import org.piterconsulting.controllers.dto.AccountRequest;
 import org.piterconsulting.controllers.dto.AccountResponse;
-import org.piterconsulting.repository.AccountSpringJpaRepository;
+import org.piterconsulting.repository.AccountRepository;
 import org.piterconsulting.repository.entity.Account;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class AccountService {
 
 
-    private final AccountSpringJpaRepository repository;
+    private final AccountRepository repository;
 
+    public AccountService(AccountRepository repository) {
+        this.repository = repository;
+    }
 
-
-    public AccountResponse findById(long id){
-        return   repository
-              .findById(id)
+    public AccountResponse findById(long id) {
+        return repository
+                .findById(id)
                 .map(account -> AccountResponse.builder()
                         .balance(account.getBalance())
                         .currency(account.getCurrency())
                         .userId(account.getUserId())
                         .id(account.getId())
                         .build()
-                        )
-              .orElseThrow(() -> new IllegalArgumentException("Account with "+id+" not found"));
+                )
+                .orElseThrow(() -> new IllegalArgumentException("Account with " + id + " not found"));
     }
-
-
-    public void addAccount(AccountRequest account){
+    public void addAccount(AccountRequest account) {
         repository.save(
                 Account.builder()
-                .balance(account.getBalance())
-                .currency(account.getCurrency())
-                .userId(account.getUserId())
-                .build()
+                        .balance(account.getBalance())
+                        .currency(account.getCurrency())
+                        .userId(account.getUserId())
+                        .build()
         );
-
 
     }
 
-    public void transfer(
-            long fromAccountId,
-            long toAccountId,
-            double amount)
-    {
-
-
+    public void transfer(long fromAccountId, long toAccountId, double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Negative amount is not allowed");
         }
@@ -59,12 +50,12 @@ public class AccountService {
         if (accountFrom.getBalance() - amount >= 0) {
             accountFrom.setBalance(accountFrom.getBalance() - amount);
             accountTo.setBalance(accountTo.getBalance() + amount);
+        }else{
+            throw new NoSufficientFundsException("Not enough money in bank!");
         }
         repository.save(accountFrom);
         repository.save(accountTo);
     }
-
-
 
 
 }

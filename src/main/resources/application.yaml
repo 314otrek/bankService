@@ -6,4 +6,5 @@ spring:
     url: "jdbc:postgresql://localhost:5432/test"
     driver-class: "org.postgresql.Driver"
 
-
+server:
+  port: 8081

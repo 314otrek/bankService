@@ -9,6 +9,7 @@ import java.time.OffsetDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class TransactionResponse {
 
     private long id;

@@ -1,26 +1,19 @@
-//package org.piterconsulting.repository;
-//
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.piterconsulting.repository.entity.Client;
-//import org.piterconsulting.service.BankService;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//public class ClientJpaRepositoryTest {
-//
-//    private ClientSpringJpaRepository repository;
-//    private BankService bankService;
-//
-//    @BeforeEach
-//    public void steup(){
-//        repository = mock()
-//    }
-//
-//
+package org.piterconsulting.repository;
+
+import org.piterconsulting.service.AccountService;
+import org.piterconsulting.service.ClientService;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class ClientJpaRepositoryTest {
+
+    private ClientRepository repository;
+    private ClientService bankService;
+    private AccountService accountService;
+
+
+
+
 //    @Test
 //    public void veryfiyIfUserIsAddingCorrectlyToTheRepository(){
 //        //given
@@ -39,5 +32,5 @@
 //        assertEquals(expectedClient,actualClient);
 //
 //    }
-//
-//}
+
+}

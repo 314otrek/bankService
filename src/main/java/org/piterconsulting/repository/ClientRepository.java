@@ -11,10 +11,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ClientSpringJpaRepository extends JpaRepository<Client,Long> {
+public interface ClientRepository extends JpaRepository<Client,Long> {
 
-    Client findByMail( String mail);
-
+    Client findByMail(String mail);
 
     List<Client> findByName(String name);
     Page<Client> findByName(String name, Pageable pageable);
