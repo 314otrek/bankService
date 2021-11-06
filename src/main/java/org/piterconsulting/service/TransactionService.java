@@ -14,11 +14,13 @@ public class TransactionService {
 
 
     private final TransactionRepository repository;
+    private final CurrencyService currencyService;
     private  final AccountService accountService;
     private final TransactionMapper mapper;
 
-    public TransactionService(TransactionRepository repository, AccountService accountService, TransactionMapper mapper) {
+    public TransactionService(TransactionRepository repository, CurrencyService currencyService, AccountService accountService, TransactionMapper mapper) {
         this.repository = repository;
+        this.currencyService = currencyService;
         this.accountService = accountService;
         this.mapper = mapper;
     }
@@ -37,6 +39,9 @@ public class TransactionService {
     }
 
     public void createTransaction(TransactionRequest request){
+        if(!currencyService.getCurrencyRates().getRates().containsKey(request.getCurrency())){
+            throw new NoSufficientFundsException("There is no currency like "+request.getCurrency() + "!");
+        }
         accountService.transfer(
                 request.getAccountIdFrom()
                 ,request.getAccountIdTo()

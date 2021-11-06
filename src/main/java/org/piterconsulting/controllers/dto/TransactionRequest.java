@@ -15,7 +15,7 @@ import javax.persistence.Column;
 public class TransactionRequest {
 
     private double amount;
-    private String currency;
+     private String currency;
     private long accountIdFrom;
     private long accountIdTo;
 

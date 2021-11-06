@@ -27,6 +27,10 @@ public class CurrencyService {
         return getCurrencyBodyApi();
     }
     public double getCurrencyValueByName(String name){
+        if(getCurrencyBodyApi().getRates().containsKey(name)){
         return getCurrencyBodyApi().getRates().get(name);
+        } else{
+            throw new NoSufficientFundsException("In base is no Currency like this");
+        }
     }
 }
